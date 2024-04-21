@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14...3.29)
 
-project(GlfwStarterProject VERSION 1.0
+project(LearnOpenGL VERSION 1.0
                     LANGUAGES C CXX)
 
 find_package(OpenGL REQUIRED)
@@ -15,7 +15,7 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/glfw/glfw.git
         GIT_TAG 3.4)
 
-# actually fetch declared depedency
+
 fetchcontent_makeavailable(glfw3)
 
 # add a static library called lib

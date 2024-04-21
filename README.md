@@ -1,10 +1,6 @@
-# Glfw starter project
+# Learn OpenGL
 
-A stater project that include: 
-- CMake
-- GLFW 3.4
-- Cpp 11
-- GLAD for OpenGL 3.3 core profile
+Project used for learning OpenGL with the https://learnopengl.com tutorials.
 
 # Useful resources
 
