@@ -16,10 +16,9 @@ public:
         bool HasCompiled;
         unsigned int Id;
     };
+    ~Shader();
     static Shader FromFile(const std::string &vertexPath, const std::string &fragmentPath);
-
     void Use();
-
     void SetUniform(const std::string& uniform, bool value) const;
     void SetUniform(const std::string& uniform, float value) const;
     void SetUniform(const std::string& uniform, int value) const;

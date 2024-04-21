@@ -89,6 +89,9 @@ void Shader::SetUniform(const std::string &uniform, float value) const {
     glUniform1f(location, value);
 }
 
+Shader::~Shader(){
+    glDeleteProgram(id);
+}
 
 
 
