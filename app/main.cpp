@@ -1,42 +1,10 @@
 #include "lib/vector2.h"
+#include "lib/Shader.h"
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <string>
+#include <math.h>
 
-static unsigned int CompileShader(unsigned int type, const std::string& source){
-    unsigned int id = glCreateShader(type);
-    const char* src = source.c_str();
-    glShaderSource(id, 1, &src, nullptr);
-    glCompileShader(id);
-    int result{0};
-    glGetShaderiv(id, GL_COMPILE_STATUS, &result);
-    if(result == GL_FALSE){
-        int messageLength{0};
-        glGetShaderiv(id, GL_INFO_LOG_LENGTH, &messageLength);
-        char* message = (char*)alloca(messageLength * sizeof (char ));
-        glGetShaderInfoLog(id, messageLength, &messageLength, message);
-        std::cout << "Failed to compile shader type: " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << std::endl;
-        std::cout << message << std::endl;
-        glDeleteShader(id);
-        return 0;
-    }
-    return id;
-}
-
-static unsigned int CreateShaderProgram(const std::string& vertexSrc, const std::string& fragmentSrc){
-    unsigned int program = glCreateProgram();
-    unsigned int vertex = CompileShader(GL_VERTEX_SHADER, vertexSrc);
-    unsigned int fragment = CompileShader(GL_FRAGMENT_SHADER, fragmentSrc);
-    glAttachShader(program, vertex);
-    glAttachShader(program, fragment);
-    glLinkProgram(program);
-    glValidateProgram(program);
-
-    glDeleteShader(vertex);
-    glDeleteShader(fragment);
-    return program;
-}
 
 int main()
 {
@@ -79,27 +47,19 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vector2), 0);
 
-    const std::string vertexShaderSource = "#version 330 core\n"
-                                           "layout (location = 0) in vec4 position;\n"
-                                           "void main()\n"
-                                           "{\n"
-                                           "   gl_Position = position;\n"
-                                           "}\n";
 
-    const std::string fragmentShaderSource = "#version 330 core\n"
-                                             "out vec4 color;\n"
-                                             "void main()\n"
-                                             "{\n"
-                                             "   color = vec4(1.0, 0.0, 0.0, 1.0);\n"
-                                             "}\n";
-
-
-    unsigned int shaderProgram = CreateShaderProgram(vertexShaderSource, fragmentShaderSource);
-    glUseProgram(shaderProgram);
+    Shader defaultShader = Shader::FromFile("../../resources/default.vertex", "../../resources/default.frag");
 
     while (!glfwWindowShouldClose(window)){
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
+
+        float currTime = glfwGetTime();
+        float green = sin(currTime) / 2.0f + 0.5f;
+
+        defaultShader.Use();
+        defaultShader.SetUniform("uGreen", green);
+
         glBindVertexArray(VAO);
         glDrawArrays(GL_TRIANGLES, 0, 3);
 

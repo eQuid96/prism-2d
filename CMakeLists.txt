@@ -19,7 +19,10 @@ FetchContent_Declare(
 fetchcontent_makeavailable(glfw3)
 
 # add a static library called lib
-add_library(lib STATIC src/vector2.cpp include/lib/vector2.h)
+add_library(lib STATIC src/vector2.cpp include/lib/vector2.h
+        src/Shader.cpp
+        include/lib/Shader.h
+)
 
 # add include dir to lib target
 target_include_directories(lib PUBLIC include)
