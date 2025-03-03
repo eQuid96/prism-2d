@@ -1,8 +1,10 @@
-# create an executable called learn-opengl
-add_executable(learn-opengl main.cpp glad.c)
+cmake_minimum_required(VERSION 3.10)
+project(app)
 
-target_compile_features(learn-opengl PRIVATE cxx_std_11)
-target_include_directories(learn-opengl PRIVATE ../include)
+# create an executable called app
+add_executable(app main.cpp)
 
-# link lib glfw opengl and glfw dependencies
-target_link_libraries(learn-opengl lib glfw ${OPENGL_gl_LIBRARY} ${GLFW_LIBRARIES})
+target_compile_features(app PRIVATE cxx_std_11)
+
+# link lib prism
+target_link_libraries(app prism ${OPENGL_gl_LIBRARY} ${GLFW_LIBRARIES})

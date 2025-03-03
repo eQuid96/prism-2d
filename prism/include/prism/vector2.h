@@ -9,10 +9,4 @@ struct Vector2
     Vector2(float x, float y) : x(x), y(y) {}
 };
 
-class Lib
-{
-public:
-    static Vector2 AddVector2(const Vector2 &v1, const Vector2 &v2);
-};
-
 #endif
