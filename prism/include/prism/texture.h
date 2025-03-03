@@ -3,6 +3,7 @@
 #ifndef _TEXTURE_H
 #define _TEXTURE_H
 
+#include <cstdint>
 #include <string>
 
 class Texture
@@ -15,25 +16,25 @@ class Texture
     };
 
    private:
-    int width = 0;
-    int height = 0;
-    int channels = 0;
-    unsigned int id = 0;
-    TextureFormat format;
+    uint32_t m_Width = 0;
+    uint32_t m_Height = 0;
+    uint32_t m_Channels = 0;
+    uint32_t m_Id = 0;
+    TextureFormat m_Format;
 
-    Texture(int width, int height, int channels, unsigned int id, TextureFormat format)
-        : width(width), height(height), channels(channels), id(id), format(format)
+    Texture(uint32_t width, uint32_t height, uint32_t channels, uint32_t id, TextureFormat format)
+        : m_Width(width), m_Height(height), m_Channels(channels), m_Id(id), m_Format(format)
     {
     }
 
    public:
-    int GetWidth() const
+    uint32_t GetWidth() const
     {
-        return width;
+        return m_Width;
     }
-    int GetHeight() const
+    uint32_t GetHeight() const
     {
-        return height;
+        return m_Height;
     }
     static Texture FromFile(const std::string &filePath, bool withMipmap, TextureFormat format);
     void Bind();

@@ -103,9 +103,13 @@
 using namespace prism;
 int main(void)
 {
-    Application app = prism::Application(
-        ApplicationStartUpArgs{.Width = 1280, .Height = 720, .Name = "Prism App"});
+    ApplicationConfig config;
+    config.Width = 1280;
+    config.Height = 720;
+    config.Name = "Prism Test App";
 
-    app.run();
+    Application app = Application(config);
+
+    app.Run();
     return 0;
 }

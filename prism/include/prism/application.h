@@ -1,44 +1,48 @@
 #ifndef __PRISM_APPLICATION
 #define __PRISM_APPLICATION
 
+#include <_types/_uint32_t.h>
+#include <cstdint>
 #include "prism/log.h"
+#include <string>
 
-// Forward Declaration
+// Forward Declarations
 class GLFWwindow;
 
 namespace prism
 {
 
-struct ApplicationStartUpArgs
+struct ApplicationConfig
 {
-    int Width;
-    int Height;
-    const char* Name;
+    uint32_t Width = 1280;
+    uint32_t Height = 720;
+    std::string Name = "Prism App";
 };
 
 class Application
 {
    private:
-    GLFWwindow* window = nullptr;
-    ApplicationStartUpArgs appArgs{};
+    GLFWwindow* m_Window = nullptr;
+    ApplicationConfig m_AppConfig{};
 
    public:
-    Application(ApplicationStartUpArgs args) : appArgs(args) {}
-    void run();
+    Application(ApplicationConfig config) : m_AppConfig(config) {}
 
-    int get_window_width() const
+    void Run();
+
+    uint32_t GetWindowWidth() const
     {
-        return appArgs.Width;
+        return m_AppConfig.Width;
     }
 
-    int get_window_height() const
+    uint32_t GetWindowHeight() const
     {
-        return appArgs.Height;
+        return m_AppConfig.Height;
     }
 
-    const char* get_window_name() const
+    const std::string& GetWindowName() const
     {
-        return appArgs.Name;
+        return m_AppConfig.Name;
     }
 };
 

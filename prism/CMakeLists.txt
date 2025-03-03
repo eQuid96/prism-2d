@@ -12,7 +12,7 @@ add_library(prism STATIC ${PRISM_SOURCES_FILES})
 find_package(OpenGL REQUIRED)
 include(FetchContent)
 
-# decleare a depedency to download
+# GLFW Deps
 FetchContent_Declare(
         glfw3
         GIT_REPOSITORY https://github.com/glfw/glfw.git

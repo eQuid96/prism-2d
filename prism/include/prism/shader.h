@@ -1,6 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
+#include <cstdint>
 #include <string>
 
 class Shader
@@ -25,10 +26,10 @@ class Shader
     void SetUniform(const std::string &uniform, int value) const;
 
    private:
-    Shader(unsigned int id) : id(id) {}
+    Shader(unsigned int id) : m_Id(id) {}
     static ShaderCompilationResult CompileShader(const std::string &src, const Shader::Type type);
 
-    unsigned int id;
+    uint32_t m_Id;
 };
 
 #endif

@@ -79,31 +79,31 @@ Shader::ShaderCompilationResult Shader::CompileShader(const std::string &src,
 
 void Shader::Use()
 {
-    if (id != 0)
+    if (m_Id != 0)
     {
-        glUseProgram(id);
+        glUseProgram(m_Id);
     }
 }
 
 void Shader::SetUniform(const std::string &uniform, bool value) const
 {
-    int location = glGetUniformLocation(id, uniform.c_str());
+    int location = glGetUniformLocation(m_Id, uniform.c_str());
     glUniform1i(location, (int)value);
 }
 
 void Shader::SetUniform(const std::string &uniform, int value) const
 {
-    int location = glGetUniformLocation(id, uniform.c_str());
+    int location = glGetUniformLocation(m_Id, uniform.c_str());
     glUniform1i(location, value);
 }
 
 void Shader::SetUniform(const std::string &uniform, float value) const
 {
-    int location = glGetUniformLocation(id, uniform.c_str());
+    int location = glGetUniformLocation(m_Id, uniform.c_str());
     glUniform1f(location, value);
 }
 
 Shader::~Shader()
 {
-    glDeleteProgram(id);
+    glDeleteProgram(m_Id);
 }

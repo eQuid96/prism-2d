@@ -8,7 +8,7 @@
 namespace prism
 {
 
-void Application::run()
+void Application::Run()
 {
     if (!glfwInit())
     {
@@ -20,20 +20,20 @@ void Application::run()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window =
-        glfwCreateWindow(get_window_width(), get_window_height(), get_window_name(), NULL, NULL);
-    if (!window)
+    m_Window =
+        glfwCreateWindow(GetWindowWidth(), GetWindowHeight(), GetWindowName().c_str(), NULL, NULL);
+    if (!m_Window)
     {
         prism_log_error("Unable to create window");
     }
 
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(m_Window);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         prism_log_error("Error initializing GLAD");
     }
 
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(m_Window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
 

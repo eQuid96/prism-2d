@@ -1,5 +1,7 @@
 #include "prism/texture.h"
 #include "vendor/glad/glad.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include "vendor/stb_image.h"
 
 static inline GLint GetOpenGLFormat(Texture::TextureFormat format)
@@ -23,7 +25,7 @@ Texture Texture::FromFile(const std::string &filePath, bool withMipMap, TextureF
         throw std::runtime_error("Error loading texture at path: " + filePath);
     }
 
-    unsigned int id;
+    uint32_t id;
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
 
@@ -41,13 +43,13 @@ Texture Texture::FromFile(const std::string &filePath, bool withMipMap, TextureF
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     stbi_image_free(data);
-    return Texture{width, height, channels, id, format};
+    return Texture{(uint32_t)width, (uint32_t)height, (uint32_t)channels, id, format};
 }
 
 void Texture::Bind()
 {
-    if (id != 0)
+    if (m_Id != 0)
     {
-        glBindTexture(GL_TEXTURE_2D, id);
+        glBindTexture(GL_TEXTURE_2D, m_Id);
     }
 }
