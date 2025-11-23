@@ -1,7 +1,6 @@
 #ifndef __PRISM_APPLICATION
 #define __PRISM_APPLICATION
 
-#include <_types/_uint32_t.h>
 #include <cstdint>
 #include "prism/log.h"
 #include <string>
@@ -24,9 +23,12 @@ class Application
    private:
     GLFWwindow* m_Window = nullptr;
     ApplicationConfig m_AppConfig{};
+    bool m_IsRunning = false;
+    float m_LastFrameTime = 0.0f;
 
    public:
     Application(ApplicationConfig config) : m_AppConfig(config) {}
+    ~Application();
 
     void Run();
 
@@ -44,6 +46,16 @@ class Application
     {
         return m_AppConfig.Name;
     }
+
+    float GetTime();
+
+    bool IsRunning()
+    {
+        return m_IsRunning;
+    }
+
+   private:
+    void ShutDown();
 };
 
 };  // namespace prism
